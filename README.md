@@ -102,7 +102,7 @@ Este é um projeto acadêmico e **não está pronto para produção**. Pontos qu
 
 ## Autor
 
-**João Victor Mourão** — estudante de Segurança da Informação (UCB) e técnico em Desenvolvimento de Sistemas.
+**João Victor Mourão** — estudante de Segurança da Informação (UCB) e técnico em Desenvolvimento de Sistemas juntamente com demais colegas de equipe Rodrigo Alves e João Gabriel Feitosa.
 
 Projeto originado como trabalho em grupo na ETSM.
 
