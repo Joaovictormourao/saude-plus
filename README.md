@@ -4,7 +4,19 @@ Sistema web de gerenciamento e agendamento de consultas médicas, desenvolvido c
 
 Pacientes se cadastram, escolhem especialidade e médico e agendam consultas. Médicos acompanham sua agenda e enviam relatórios. Administradores gerenciam pacientes, especialidades, consultas e mensagens de contato.
 
-## Tecnologias
+## Telas
+
+| Página inicial | Agendamento de consulta |
+|---|---|
+| ![Página inicial](docs/screenshots/home.png) | ![Agendamento de consulta](docs/screenshots/agendamento.png) |
+
+| Painel do paciente | Painel do médico |
+|---|---|
+| ![Painel do paciente](docs/screenshots/painel-paciente.png) | ![Painel do médico](docs/screenshots/painel-medico.png) |
+
+| Início do administrador | Painel administrativo |
+|---|---|
+| ![Início do administrador](docs/screenshots/inicial-admin.png) | ![Painel administrativo](docs/screenshots/painel-admin.png) |## Tecnologias
 
 - **Backend:** Java 17, Jakarta Servlets 6, JDBC, Gson
 - **Banco de dados:** MySQL 8
