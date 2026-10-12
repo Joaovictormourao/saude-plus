@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Painel do Paciente</title>
+
+<link rel="stylesheet" href="css/styles.css">
+
+<style>
+
+.painel-container{
+
+    max-width:1200px;
+    margin:40px auto;
+    padding:20px;
+
+}
+
+.cards{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+
+}
+
+.card-painel{
+
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    text-align:center;
+
+}
+
+.card-painel h3{
+
+    margin-bottom:15px;
+    color:var(--primary);
+
+}
+
+.consultas{
+
+    margin-top:40px;
+
+}
+
+.consulta-item{
+
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+}
+
+.btn-danger{
+
+    background:#e53935;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:6px;
+    cursor:pointer;
+
+}
+
+.btn-danger:hover{
+
+    background:#c62828;
+
+}
+
+.btn-relatorio{
+
+    background:#673ab7;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:6px;
+    cursor:pointer;
+
+}
+
+.btn-relatorio:hover{
+
+    background:#512da8;
+
+}
+
+.botoes-painel{
+
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    margin-top:15px;
+    flex-wrap:wrap;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<h1>🏥 Clínica Saúde+</h1>
+<p>Sistema de Agendamento de Consultas</p>
+
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="index.html">Início</a></li>
+<li><a href="Agendamento.html">Agendar</a></li>
+<li><a href="#" onclick="logout(); return false;" style="color: #e53935;">Sair</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<div class="painel-container">
+
+<h2>
+Bem-vindo ao Painel do Paciente
+</h2>
+
+<br>
+
+<div class="cards">
+
+<!-- AGENDAR -->
+<div class="card-painel">
+
+<h3>📅 Agendar Consulta</h3>
+
+<p>
+Marque uma nova consulta rapidamente.
+</p>
+
+<div class="botoes-painel">
+
+<a href="Agendamento.html"
+class="btn btn-primary">
+
+Agendar
+
+</a>
+
+</div>
+
+</div>
+
+<!-- CONSULTAS -->
+<div class="card-painel">
+
+<h3>📋 Consultas Marcadas</h3>
+
+<p>
+Visualize seus agendamentos.
+</p>
+
+<div class="botoes-painel">
+
+<button
+class="btn btn-primary"
+id="btnMostrarConsultas">
+
+Ver Consultas
+
+</button>
+
+</div>
+
+</div>
+
+<!-- RELATÓRIOS -->
+<div class="card-painel">
+
+<h3>📊 Relatórios</h3>
+
+<p>
+Acompanhe histórico e consultas.
+</p>
+
+<div class="botoes-painel">
+
+<button
+class="btn-relatorio"
+id="btnRelatorios">
+
+Ver Relatórios
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CONSULTAS -->
+<div class="consultas">
+
+<h2>
+Minhas Consultas
+</h2>
+
+<br>
+
+<div id="listaConsultas">
+
+<p>
+Nenhuma consulta agendada.
+</p>
+
+</div>
+
+</div>
+
+<!-- RELATÓRIOS -->
+<div class="consultas">
+
+<h2>
+Relatórios
+</h2>
+
+<br>
+
+<div id="relatorios">
+
+<p>
+Nenhum relatório disponível.
+</p>
+
+</div>
+
+</div>
+
+<!-- VOLTAR -->
+<div style="margin-top:30px; text-align:center;">
+
+<a href="painel_paciente.html"
+class="btn btn-primary">
+
+Voltar para o Painel
+
+</a>
+
+</div>
+
+</div>
+
+<footer>
+
+<p>
+&copy; 2026 Clínica Saúde+
+</p>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/alerts.js"></script>
+<script src="js/config.js"></script>
+<script src="js/painel.js"></script>
+
+</body>
+</html>

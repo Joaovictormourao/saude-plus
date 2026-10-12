@@ -1,0 +1,62 @@
+# Maven
+target/
+*.war
+*.jar
+.m2/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+.flattened-pom.xml
+.classpath
+.project
+.settings/
+bin/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+*.iml
+.iws
+.ipr
+out/
+
+# Eclipse
+.classpath
+.project
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Node (se usar npm)
+node_modules/
+npm-debug.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Compiled files
+*.class
+
+# Database backups
+*.sql.bak
+*.db
+*.sqlite
+
+# Temp files
+tmp/
+temp/
+*.tmp

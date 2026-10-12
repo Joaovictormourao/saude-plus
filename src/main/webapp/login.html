@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Clínica Saúde+</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <h1>🏥 Clínica Saúde+</h1>
+            <p>Sistema de Agendamento de Consultas</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="especialidades.html">Especialidades</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- FORMULÁRIO DE LOGIN -->
+    <div class="form-container">
+        <h2 class="form-title">Acesso do Paciente</h2>
+        
+       <form id="formLogin" method="post">
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">E-mail *</label>
+                <input type="email" id="email" name="email" required placeholder="seu.email@example.com">
+            </div>
+
+            <!-- Senha -->
+            <div class="form-group">
+                <label for="senha">Senha *</label>
+                <div class="password-field">
+                    <input type="password" id="senha" name="senha" required placeholder="Digite sua senha" autocomplete="current-password">
+                    <button type="button" class="btn-toggle-password" data-target="senha" aria-label="Mostrar senha" title="Mostrar senha">👁️</button>
+                </div>
+            </div>
+
+            <!-- Botão Enviar -->
+            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+
+            <!-- Links -->
+            <div class="form-link">
+                <p><a href="recuperar_senha.html">Esqueceu sua senha?</a></p>
+                <p>Não tem cadastro? <a href="cadastro.html">Cadastre-se aqui</a></p>
+                <p><a href="login_admin.html"> Login Administrativo (Restrito)</a></p>
+                <p><a href="login_medico.html">Login Médico (Restrito)</a></p>
+            </div>
+        </form>
+    </div>
+
+    <!-- FOOTER -->
+    <footer style="text-align: center; padding: 2rem; background-color: #f5f5f5; margin-top: 3rem;">
+        <p>&copy; 2026 Clínica Saúde+. Todos os direitos reservados.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/alerts.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/login.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.btn-toggle-password[data-target]').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const targetId = btn.getAttribute('data-target');
+                    const input = document.getElementById(targetId);
+                    if (!input) return;
+
+                    const isPassword = input.type === 'password';
+                    input.type = isPassword ? 'text' : 'password';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

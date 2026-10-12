@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Médico - Clínica Saúde+</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .medico-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .header-medico {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .header-medico h1 {
+            color: var(--primary);
+        }
+
+        .btn-logout {
+            padding: 10px 20px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .agendamentos-grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .agendamento-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--primary);
+        }
+
+        .agendamento-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .agendamento-header h3 {
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-agendado {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-cancelado {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .status-realizado {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .agendamento-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .agendamento-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .btn-cancelar {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn-relatorio {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-visualizar {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .form-relatorio {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-relatorio h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 4px rgba(33, 150, 243, 0.2);
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-dark);
+        }
+
+        .mensagens-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .mensagem-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #2196F3;
+        }
+
+        .mensagem-card.lida {
+            opacity: 0.7;
+        }
+
+        .mensagem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .mensagem-from {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .mensagem-data {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .mensagem-conteudo {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .alert {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .alert-error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef5350;
+        }
+
+        .alert-success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #66bb6a;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>🏥 Clínica Saúde+</h1>
+            <p>Painel Médico</p>
+        </div>
+    </header>
+
+    <div class="medico-container">
+        <div class="header-medico">
+            <div>
+                <h1>Bem-vindo, Dr(a). <span id="nomeMedico">---</span></h1>
+                <p id="crm" style="color: #999;"></p>
+            </div>
+            <button class="btn-logout" onclick="logout()">Sair</button>
+        </div>
+
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="abrirAba('agendamentos')">Meus Agendamentos</button>
+            <button class="tab-button" onclick="abrirAba('novo-relatorio')">Enviar Relatório</button>
+            <button class="tab-button" onclick="abrirAba('mensagens')">Mensagens Recebidas</button>
+        </div>
+
+        <!-- ABA: Agendamentos -->
+        <div id="agendamentos" class="tab-content active">
+            <div id="agendamentosContainer" class="agendamentos-grid">
+                <div class="empty-state">Carregando agendamentos...</div>
+            </div>
+        </div>
+
+        <!-- ABA: Novo Relatório -->
+        <div id="novo-relatorio" class="tab-content">
+            <div class="form-relatorio">
+                <h3>Enviar Relatório da Consulta</h3>
+                <form id="formRelatorio">
+                    <div class="form-group">
+                        <label for="selectAgendamento">Selecione a Consulta:</label>
+                        <select id="selectAgendamento" required>
+                            <option value="">-- Selecione uma consulta --</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="relatorioTexto">Relatório da Consulta:</label>
+                        <textarea id="relatorioTexto" placeholder="Descreva o diagnóstico, orientações e recomendações..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Enviar Relatório</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ABA: Mensagens -->
+        <div id="mensagens" class="tab-content">
+            <div id="mensagensContainer" class="mensagens-grid">
+                <div class="empty-state">Nenhuma mensagem recebida</div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; background-color: #f5f5f5; margin-top: 3rem;">
+        <p>&copy; 2026 Clínica Saúde+. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/config.js"></script>
+    <script src="js/alerts.js"></script>
+
+    <script>
+        let medicoAtual = null;
+        let agendamentosAtual = [];
+
+        function abrirAba(nomeAba) {
+            document.querySelectorAll('.tab-content').forEach(aba => aba.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(nomeAba).classList.add('active');
+            // garantir ativação do botão clicado
+            const btn = Array.from(document.querySelectorAll('.tab-button')).find(b => b.getAttribute('onclick')?.includes(nomeAba));
+            if (btn) btn.classList.add('active');
+        }
+
+        function mostrarAlerta(mensagem, tipo) {
+            // Sem fallback nativo: se SweetAlert2 não existir, apenas loga.
+            if (window.alerts?.showError && tipo === 'error') return window.alerts.showError('Erro', mensagem);
+            if (window.alerts?.showSuccess && tipo === 'success') return window.alerts.showSuccess('Sucesso', mensagem);
+            if (window.alerts?.showWarning && tipo === 'warning') return window.alerts.showWarning('Atenção', mensagem);
+
+            console.error('[SweetAlert2] mostrarAlerta indisponível', { mensagem, tipo });
+        }
+
+
+        async function cancelarAgendamento(agendamentoId) {
+            const confirmar = await window.alerts?.showConfirm({
+
+                title: 'Confirmação',
+                text: 'Tem certeza que deseja cancelar esta consulta?',
+                confirmButtonText: 'Cancelar',
+                cancelButtonText: 'Não cancelar',
+                icon: 'warning'
+            });
+
+            if (!confirmar) return;
+
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/agendamentos?id=${agendamentoId}`, { method: 'DELETE' });
+
+                if (!response.ok) {
+                    let data = null;
+                    try { data = await response.json(); } catch (_) {}
+                    mostrarAlerta(data?.erro || 'Erro ao cancelar consulta', 'error');
+                    return;
+                }
+
+                mostrarAlerta('Consulta cancelada com sucesso!', 'success');
+                await carregarAgendamentos();
+            } catch (e) {
+                mostrarAlerta('Erro ao conectar com o servidor', 'error');
+            }
+        }
+
+        async function carregarAgendamentos() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/agendamentos?medico=${medicoAtual.id}`);
+                const agendamentos = await response.json();
+
+                agendamentosAtual = agendamentos;
+
+                const container = document.getElementById('agendamentosContainer');
+
+                if (!agendamentos || agendamentos.length === 0) {
+                    container.innerHTML = '<div class="empty-state">Nenhum agendamento encontrado</div>';
+                    document.getElementById('selectAgendamento').innerHTML = '<option value="">-- Nenhuma consulta disponível --</option>';
+                    return;
+                }
+
+                let selectHTML = '<option value="">-- Selecione uma consulta --</option>';
+                agendamentos.forEach(ag => {
+                    selectHTML += `<option value="${ag.id}">${ag.nomePaciente || ag.paciente || 'Paciente'} - ${ag.data} às ${ag.hora}</option>`;
+                });
+                document.getElementById('selectAgendamento').innerHTML = selectHTML;
+
+                container.innerHTML = agendamentos.map(ag => `
+                    <div class="agendamento-card">
+                        <div class="agendamento-header">
+                            <h3>${ag.nomePaciente || ag.paciente || 'Paciente'}</h3>
+                            <span class="status-badge status-${String(ag.status || '').toLowerCase()}">${ag.status || ''}</span>
+                        </div>
+                        <div class="agendamento-info">
+                            <div class="info-item"><div class="info-label">Data</div><div class="info-value">${ag.data}</div></div>
+                            <div class="info-item"><div class="info-label">Hora</div><div class="info-value">${ag.hora}</div></div>
+                            <div class="info-item"><div class="info-label">Especialidade</div><div class="info-value">${ag.especialidade}</div></div>
+                            <div class="info-item"><div class="info-label">Status</div><div class="info-value">${ag.status}</div></div>
+                        </div>
+                        ${ag.descricao ? `<p><strong>Observações:</strong> ${ag.descricao}</p>` : ''}
+                        <div class="agendamento-actions">
+                            ${ag.status !== 'Cancelado' ? `
+                                <button class="btn-small btn-cancelar" onclick="cancelarAgendamento(${ag.id})">Cancelar Consulta</button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                mostrarAlerta('Erro ao carregar agendamentos', 'error');
+                document.getElementById('agendamentosContainer').innerHTML = '<div class="empty-state">Erro ao carregar agendamentos</div>';
+            }
+        }
+
+        async function carregarMensagens() {
+            try {
+                // Mensagens médicas = relatórios enviados pelo médico
+                const response = await fetch(`${API_ENDPOINTS.MENSAGENS}/relatorio?medico=${medicoAtual.id}`);
+                const mensagens = await response.json();
+
+                const container = document.getElementById('mensagensContainer');
+
+                if (!mensagens || mensagens.length === 0) {
+                    container.innerHTML = '<div class="empty-state">Nenhuma mensagem recebida</div>';
+                    return;
+                }
+
+                container.innerHTML = mensagens.map(msg => `
+                    <div class="mensagem-card ${msg.lida ? 'lida' : ''}">
+                        <div class="mensagem-header">
+                            <div class="mensagem-from">De: ${msg.nomePaciente} (${msg.nomeEspecialidade})</div>
+                            <div class="mensagem-data">${msg.dataEnvio ? new Date(msg.dataEnvio).toLocaleString('pt-BR') : ''}</div>
+                        </div>
+                        <div class="mensagem-conteudo">${msg.conteudo}</div>
+                        <small style="color: #ccc;">${msg.lida ? 'Lida' : 'Não lida'}</small>
+                    </div>
+                `).join('');
+            } catch (e) {
+                mostrarAlerta('Erro ao carregar mensagens', 'error');
+            }
+        }
+
+        async function enviarRelatorio(agendamentoId, relatorioTexto) {
+            const agendamento = agendamentosAtual.find(a => a.id === agendamentoId);
+            if (!agendamento) {
+                mostrarAlerta('Agendamento não encontrado', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_ENDPOINTS.MENSAGENS}/relatorio`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        agendamentoId,
+                        medicoId: medicoAtual.id,
+                        pacienteId: agendamento.pacienteId,
+                        tipo: 'relatorio',
+                        conteudo: relatorioTexto
+                    })
+                });
+
+                let data = null;
+                try { data = await response.json(); } catch (_) {}
+
+                if (!response.ok) {
+                    mostrarAlerta(data?.erro || 'Erro ao enviar relatório', 'error');
+                    return;
+                }
+
+                mostrarAlerta('Relatório enviado com sucesso!', 'success');
+                document.getElementById('formRelatorio').reset();
+                document.getElementById('selectAgendamento').value = '';
+                document.getElementById('relatorioTexto').value = '';
+
+                await carregarMensagens();
+            } catch (e) {
+                mostrarAlerta('Erro ao conectar com o servidor', 'error');
+            }
+        }
+
+        async function logout() {
+            const ok = await window.alerts?.showConfirm({
+                title: 'Sair',
+                text: 'Deseja realmente sair?',
+                confirmButtonText: 'Sair',
+                cancelButtonText: 'Cancelar',
+                icon: 'question'
+            });
+
+
+            if (!ok) return;
+
+            localStorage.removeItem('medico');
+            localStorage.removeItem('medicoLogado');
+            window.location.href = 'index.html';
+        }
+
+        window.addEventListener('load', () => {
+            const medico = localStorage.getItem('medico');
+            if (!medico) {
+                window.location.href = 'login_medico.html';
+                return;
+            }
+
+            medicoAtual = JSON.parse(medico);
+            document.getElementById('nomeMedico').textContent = medicoAtual.nome;
+            document.getElementById('crm').textContent = `CRM: ${medicoAtual.crm}`;
+
+            carregarAgendamentos();
+            carregarMensagens();
+        });
+
+        document.getElementById('formRelatorio').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const selectAgendamento = document.getElementById('selectAgendamento');
+            const agendamentoId = parseInt(selectAgendamento.value, 10);
+            const relatorioTexto = document.getElementById('relatorioTexto').value;
+
+            if (!agendamentoId) return mostrarAlerta('Selecione uma consulta', 'error');
+            if (!relatorioTexto || !relatorioTexto.trim()) return mostrarAlerta('Preencha o conteúdo do relatório', 'error');
+
+            await enviarRelatorio(agendamentoId, relatorioTexto);
+        });
+    </script>
+</body>
+</html>
+

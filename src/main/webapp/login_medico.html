@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Médico - Clínica Saúde+</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .login-container {
+            max-width: 500px;
+            margin: 80px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-login:hover {
+            background: var(--primary-dark);
+        }
+
+        .links-bottom {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .links-bottom a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .links-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .alert-error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef5350;
+        }
+
+        .alert-success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #66bb6a;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>🏥 Clínica Saúde+</h1>
+            <p>Sistema de Agendamento de Consultas</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="login-container">
+        <h2>Login - Médico</h2>
+        
+
+        <form id="loginForm" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <div class="password-field">
+                    <input type="password" id="senha" name="senha" required autocomplete="current-password">
+                    <button type="button" class="btn-toggle-password" data-target="senha" aria-label="Mostrar senha" title="Mostrar senha">👁️</button>
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn-login">Entrar</button>
+        </form>
+
+        <div class="links-bottom">
+            <a href="index.html">Voltar ao início</a>
+            <a href="login_admin.html">Login Admin</a>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; background-color: #f5f5f5; margin-top: 3rem;">
+        <p>&copy; 2026 Clínica Saúde+. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/alerts.js"></script>
+    <script src="js/config.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.btn-toggle-password[data-target]').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const targetId = btn.getAttribute('data-target');
+                    const input = document.getElementById(targetId);
+                    if (!input) return;
+
+                    const isPassword = input.type === 'password';
+                    input.type = isPassword ? 'text' : 'password';
+                });
+            });
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            try {
+                const response = await fetch(`${API_ENDPOINTS.MEDICOS}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, senha })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Armazenar dados do médico
+                    localStorage.setItem('medico', JSON.stringify(data));
+                    localStorage.setItem('medicoLogado', JSON.stringify(data));
+
+                    await window.alerts?.showSuccess('Login realizado', 'Bem-vindo(a)!');
+                    window.location.href = 'painel_medico.html';
+                } else {
+                    window.alerts?.showError('Falha no login', data.erro || 'E-mail ou senha inválidos.');
+                }
+            } catch (error) {
+                window.alerts?.showError('Erro de conexão', 'Não foi possível contatar o servidor.');
+            }
+        });
+    </script>
+</body>
+</html>

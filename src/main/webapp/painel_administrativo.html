@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Painel Administrativo - Clínica Saúde+</title>
+
+<link rel="stylesheet" href="css/styles.css">
+
+<style>
+
+.admin-container{
+
+    max-width:1300px;
+    margin:40px auto;
+    padding:20px;
+
+}
+
+.admin-title{
+
+    margin-bottom:30px;
+
+}
+
+.cards-admin{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    margin-bottom:40px;
+
+}
+
+.card-admin{
+
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    text-align:center;
+
+}
+
+.card-admin h3{
+
+    color:var(--primary);
+    margin-bottom:15px;
+
+}
+
+.card-admin p{
+
+    margin-bottom:20px;
+
+}
+
+.tabela-container{
+
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom:40px;
+
+}
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+
+}
+
+table th{
+
+    background:var(--primary);
+    color:white;
+    padding:15px;
+
+}
+
+table td{
+
+    padding:15px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+
+}
+
+.btn-danger{
+
+    background:#e53935;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:6px;
+    cursor:pointer;
+
+}
+
+.btn-danger:hover{
+
+    background:#c62828;
+
+}
+
+.btn-warning{
+
+    background:#ff9800;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:6px;
+    cursor:pointer;
+
+}
+
+.btn-warning:hover{
+
+    background:#ef6c00;
+
+}
+
+.relatorio-box{
+
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+}
+
+@media(max-width:900px){
+
+    table{
+
+        display:block;
+        overflow-x:auto;
+
+    }
+
+}
+
+
+        .btn-logout {
+            padding: 10px 20px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-logout:hover {
+            background: #b71c1c;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+
+<div class="logo">
+
+<h1>🏥 Clínica Saúde+</h1>
+<p>Sistema Administrativo</p>
+
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="index.html">Início</a></li>
+<li><a href="administrativo.html">Início Admin</a></li>
+
+</ul>
+
+</nav>
+
+                <div class="header-actions">
+                    <button class="btn-logout" onclick="logout()">🚪 Sair</button>
+                </div>
+
+
+</header>
+
+<!-- CONTAINER -->
+<div class="admin-container">
+
+<h2 class="admin-title">
+Painel Administrativo
+</h2>
+
+<!-- CARDS -->
+<div class="cards-admin">
+
+<div class="card-admin">
+
+<h3>
+👥 Pacientes
+</h3>
+
+<p>
+Gerenciar pacientes cadastrados.
+</p>
+
+<button
+class="btn btn-primary"
+id="btnPacientes">
+
+Ver Pacientes
+
+</button>
+
+</div>
+
+<div class="card-admin">
+
+<h3>
+📅 Consultas
+</h3>
+
+<p>
+Gerenciar consultas agendadas.
+</p>
+
+<button
+class="btn btn-primary"
+id="btnConsultas">
+
+Ver Consultas
+
+</button>
+
+</div>
+
+<div class="card-admin">
+
+<h3>
+📊 Relatórios
+</h3>
+
+<p>
+Visualizar estatísticas gerais.
+</p>
+
+<button
+class="btn btn-primary"
+id="btnRelatorios">
+
+Ver Relatórios
+
+</button>
+
+</div>
+
+</div>
+
+<!-- PACIENTES -->
+<div class="tabela-container">
+
+<h2>
+Pacientes Cadastrados
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Nome</th>
+<th>Email</th>
+<th>Ações</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabelaPacientes">
+
+<tr>
+
+<td colspan="3">
+Nenhum paciente cadastrado.
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- CONSULTAS -->
+<div class="tabela-container">
+
+<h2>
+Consultas Agendadas
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Paciente</th>
+<th>Especialidade</th>
+<th>Data</th>
+<th>Horário</th>
+<th>Ações</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabelaConsultas">
+
+<tr>
+
+<td colspan="5">
+Nenhuma consulta agendada.
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- RELATÓRIOS -->
+<div class="relatorio-box">
+
+<h2>
+Relatórios Gerais
+</h2>
+
+<br>
+
+<div id="dadosRelatorio">
+
+<p>
+Nenhum relatório disponível.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+<p>
+&copy; 2026 Clínica Saúde+
+</p>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/alerts.js"></script>
+<script src="js/config.js"></script>
+<script src="js/painel_administrativo.js"></script>
+
+
+    <script>
+        async function logout() {
+            const ok = await window.alerts?.showConfirm({
+                title: 'Sair',
+                text: 'Deseja realmente sair?',
+                confirmButtonText: 'Sair',
+                cancelButtonText: 'Cancelar',
+                icon: 'question'
+            });
+
+
+            if (ok) {
+                localStorage.removeItem('admin');
+                localStorage.removeItem('adminLogado');
+                localStorage.removeItem('medico');
+                localStorage.removeItem('medicoLogado');
+                localStorage.removeItem('paciente');
+                localStorage.removeItem('pacienteLogado');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Verifica se está autenticado
+        window.addEventListener('load', function() {
+            const admin = localStorage.getItem('admin');
+            const adminLogado = localStorage.getItem('adminLogado');
+            const medico = localStorage.getItem('medico');
+            const medicoLogado = localStorage.getItem('medicoLogado');
+            const paciente = localStorage.getItem('paciente');
+            const pacienteLogado = localStorage.getItem('pacienteLogado');
+            
+            const pagina = window.location.pathname;
+            const requerAutenticacao = ['painel', 'gerenciar', 'gerenciamento', 'Painel', 'agendamento', 'especialidades', 'Agendamento'].some(p => pagina.includes(p));
+            
+            if (requerAutenticacao && !admin && !adminLogado && !medico && !medicoLogado && !paciente && !pacienteLogado) {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

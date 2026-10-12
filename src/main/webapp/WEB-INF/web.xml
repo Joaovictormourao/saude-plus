@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <display-name>Clínica Saúde+</display-name>
+    <description>Sistema de Gerenciamento de Clínica Médica</description>
+
+    <!-- Configuração de encoding -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ignore</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Servlets de Autenticação -->
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>com.clinica.servlet.AdminServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MedicoServlet</servlet-name>
+        <servlet-class>com.clinica.servlet.MedicoServlet</servlet-class>
+    </servlet>
+
+    <!-- Servlets de Recursos -->
+    <servlet>
+        <servlet-name>PacienteServlet</servlet-name>
+        <servlet-class>com.clinica.servlet.PacienteServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AgendamentoServlet</servlet-name>
+        <servlet-class>com.clinica.servlet.AgendamentoServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>EspecialidadeServlet</servlet-name>
+        <servlet-class>com.clinica.servlet.EspecialidadeServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MensagemServlet</servlet-name>
+        <servlet-class>com.clinica.servlet.MensagemServlet</servlet-class>
+    </servlet>
+
+    <!-- Mapeamento de URLs -->
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/api/admin/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MedicoServlet</servlet-name>
+        <url-pattern>/api/medico/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MedicoServlet</servlet-name>
+        <url-pattern>/api/medicos/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PacienteServlet</servlet-name>
+        <url-pattern>/api/paciente/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PacienteServlet</servlet-name>
+        <url-pattern>/api/pacientes/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AgendamentoServlet</servlet-name>
+        <url-pattern>/api/agendamento/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AgendamentoServlet</servlet-name>
+        <url-pattern>/api/agendamentos/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>EspecialidadeServlet</servlet-name>
+        <url-pattern>/api/especialidade/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>EspecialidadeServlet</servlet-name>
+        <url-pattern>/api/especialidades/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MensagemServlet</servlet-name>
+        <url-pattern>/api/mensagem/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MensagemServlet</servlet-name>
+        <url-pattern>/api/mensagens/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Página de bem-vindo -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- Tratamento de erros -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/index.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/index.html</location>
+    </error-page>
+
+    <!-- Session configuration -->
+    <session-config>
+        <cookie-config>
+            <http-only>true</http-only>
+            <secure>false</secure>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+</web-app>

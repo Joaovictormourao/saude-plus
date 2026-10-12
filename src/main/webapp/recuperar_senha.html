@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Senha - Clínica Saúde+</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <h1>🏥 Clínica Saúde+</h1>
+            <p>Sistema de Agendamento de Consultas</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <div class="form-container">
+            <h2><span>Recuperar Senha</span> de forma fácil e rápida</h2>
+            <p>Informe seu e-mail cadastrado e defina uma nova senha de acesso.</p>
+
+            <form id="formEsqueciSenha">
+
+                <div class="form-group">
+                    <label for="email">E-mail cadastrado</label>
+                    <input type="email" id="email" name="email" required placeholder="seu.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="nova_senha">Nova senha</label>
+                    <input type="password" id="nova_senha" name="nova_senha" required minlength="6" placeholder="Mínimo 6 caracteres, com maiúscula, minúscula e número">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmar_senha">Confirmar nova senha</label>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" required minlength="6" placeholder="Repita a nova senha">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="btnRedefinirSenha">Alterar Senha</button>
+            </form>
+
+            <p style="margin-top:1rem; text-align:center;">
+                <a href="login.html">Voltar para o login</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="text-align: center; padding: 2rem; background-color: #f5f5f5; margin-top: 3rem;">
+        <p>&copy; 2026 Clínica Saúde+. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/alerts.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/esqueci_senha.js"></script>
+</body>
+</html>
